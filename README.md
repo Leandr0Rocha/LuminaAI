@@ -1,4 +1,5 @@
 # Lumina AI
+![Imagem da página inicial](image.png)
 
 Lumina AI é uma plataforma de aprendizado que oferece cursos e soluções em inteligência artificial para estudantes, profissionais e empresas. Este projeto combina uma interface web interativa com um backend robusto em Flask, integrando operações com banco de dados para gerenciar usuários, cursos e interações.
 
