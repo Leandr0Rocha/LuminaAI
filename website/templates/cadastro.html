@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="\static\style.css">
+    <link rel="icon" href="\static\images\Lumina AI.png" type="image/png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Anaheim:wght@400..800&family=Cagliostro&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+    </style>
+    <title>Cadastro - Lumina AI</title>
+</head>
+
+<body>
+    <header class="cabecalho">
+        <div class="logo">
+            <img src="\static\images\Lumina AI.png" alt="Logo da marca">
+        </div>
+        <nav>
+            <a href="/sobre#sobre">Sobre</a>
+            <a href="/sobre#duvidas">Dúvidas frequentes</a>
+            <a href="/sobre#planos">Para empresas</a>
+            <a href="/#contato">Contato</a>
+            <a href="/" class="botao">Início</a>
+        </nav>
+    </header>
+
+    <section class="cadastro">
+        <h2>Cadastro de Usuário</h2>
+        <form action="/cadastro" method="post" class="formulario-cadastro">
+            <div class="grupo-cadastro">
+                <label for="nome-completo">Nome Completo</label>
+                <input type="text" id="nome-completo" name="nome-completo" placeholder="Seu nome completo" required>
+            </div>
+            <div class="grupo-cadastro">
+                <label for="nome-usuario">Nome de Usuário</label>
+                <input type="text" id="nome-usuario" name="nome-usuario" placeholder="Seu nome de usuário" required>
+            </div>
+            <div class="grupo-cadastro">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="Seu e-mail" required>
+            </div>
+            <div class="grupo-cadastro">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" placeholder="Sua senha" required>
+            </div>
+            <div class="grupo-cadastro">
+                <label for="repetir-senha">Repetir Senha</label>
+                <input type="password" id="repetir-senha" name="repetir-senha" placeholder="Repita sua senha" required>
+            </div>
+            <div class="grupo-cadastro-checkbox">
+                <label for="termos"><input type="checkbox" id="termos" name="termos" required>Permito que este site
+                    armazene os dados preenchidos neste formulário.</label>
+            </div>
+            <button type="submit" class="botao-cadastro" href="http://127.0.0.1:5000/cadastro">Registrar</button>
+        </form>
+    </section>
+    
+    <!-- Popup cadastro -->
+    <div id="popup-cadastro" class="popup" style="display: {{ 'flex' if cadastro_sucesso else 'none' }};">
+        <div class="conteudo-popup">
+            <h2>Cadastro realizado com sucesso!</h2>
+            <p>Você pode acessar sua conta agora.</p>
+            <button class="botao-popup" onclick="location.href='/'">Voltar</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="conteudo-rodape">
+          <img src="/static/images/Iluminando o caminho para um futuro com IA.png" alt="" />
+        </div>
+        <div class="conteudo-rodape">
+          <p>&copy; 2025 Lumina AI. Todos os direitos reservados.</p>
+          <nav>
+            <a href="#">Política de Privacidade</a>
+            <a href="#">Termos de Uso</a>
+          </nav>
+        </div>
+      </footer>
+    <script src="\static\main.js"></script>
+
+</body>
+
+</html>
