@@ -10,8 +10,6 @@ Lumina AI é uma plataforma de aprendizado que oferece cursos e soluções em in
 - **Interface do Usuário**:
   - Página inicial com informações sobre a plataforma e cursos disponíveis.
   - Página de cadastro e login para usuários.
-  - Página de dúvidas frequentes e planos para empresas.
-  - Popups interativos para "Política de Privacidade" e "Termos de Uso".
   - Mensagens flash para feedback ao usuário (sucesso, erro, informações).
 
 - **Backend**:
@@ -45,7 +43,6 @@ Lumina AI é uma plataforma de aprendizado que oferece cursos e soluções em in
 
 ### Rotas Públicas
 - **`/`**: Página inicial (index).
-- **`/sobre`**: Página "Sobre" com informações sobre a empresa, dúvidas frequentes e planos para empresas.
 - **`/cadastro`**: Página de cadastro de novos usuários.
 - **`/login`**: Processa o login do usuário.
 
@@ -63,10 +60,6 @@ Lumina AI é uma plataforma de aprendizado que oferece cursos e soluções em in
    - Exibe informações sobre a Lumina AI e os cursos disponíveis.
    - Botões para navegação e login/cadastro.
 
-2. **Página "Sobre" (`/sobre`)**:
-   - Informações sobre a empresa.
-   - Seções de dúvidas frequentes e planos para empresas.
-
 3. **Página de Cadastro (`/cadastro`)**:
    - Formulário para criação de novos usuários.
 
@@ -79,7 +72,6 @@ Lumina AI é uma plataforma de aprendizado que oferece cursos e soluções em in
 
 ### Elementos Interativos
 - **Popups**:
-  - "Política de Privacidade" e "Termos de Uso".
   - Confirmação de envio de mensagem no formulário de contato.
 - **Mensagens Flash**:
   - Feedback visual para ações do usuário (ex.: sucesso no login, erro no cadastro).
