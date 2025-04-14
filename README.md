@@ -56,32 +56,6 @@ Lumina AI é uma plataforma de aprendizado que oferece cursos e soluções em in
 
 ---
 
-## 🗄️ Operações com Banco de Dados
-
-### Tabelas Principais
-1. **`User`**:
-   - Campos: `id`, `name`, `email`, `password`.
-   - Relacionamento: Muitos-para-muitos com `Curso`.
-
-2. **`Curso`**:
-   - Campos: `id`, `titulo`, `descricao`.
-   - Relacionamento: Muitos-para-muitos com `User`.
-
-3. **Associação**:
-   - Tabela intermediária para gerenciar a relação entre usuários e cursos.
-
-### Operações Suportadas
-- **Cadastro de Usuários**:
-  - Criação de novos registros no banco de dados.
-- **Login**:
-  - Verificação de credenciais e autenticação do usuário.
-- **Inscrição em Cursos**:
-  - Adiciona um curso à lista de cursos do usuário logado.
-- **Consulta de Dados**:
-  - Recupera informações sobre cursos e usuários.
-
----
-
 ## 🖥️ Interface do Programa
 
 ### Páginas Principais
@@ -100,9 +74,13 @@ Lumina AI é uma plataforma de aprendizado que oferece cursos e soluções em in
    - Exibe cursos disponíveis para o usuário logado.
    - Permite inscrição em cursos.
 
+5. **Página de Contato (`#contato`)**:
+   - Formulário para envio de mensagens diretamente para a equipe da Lumina AI.
+
 ### Elementos Interativos
 - **Popups**:
   - "Política de Privacidade" e "Termos de Uso".
+  - Confirmação de envio de mensagem no formulário de contato.
 - **Mensagens Flash**:
   - Feedback visual para ações do usuário (ex.: sucesso no login, erro no cadastro).
 

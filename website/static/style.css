@@ -589,14 +589,14 @@ footer nav {
 }
 
 footer nav a {
-    color: hsl(215, 78%, 36%);
+    color:hsl(210, 60%, 90%);
     text-decoration: none;
     font-size: 14px;
 }
 
 footer nav a:hover {
     text-decoration: underline;
-    color: hsl(215, 78%, 41%);
+    color:hsl(210, 60%, 95%);
 }
 
 /* Página de cadastro*/

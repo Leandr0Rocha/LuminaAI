@@ -1,185 +1,271 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="\static\style.css" />
     <link rel="icon" href="Flask-Web-App-Tutorial-main - Copia\website\static\images\Lumina AI.png" type="image/png" />
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Anaheim:wght@400..800&family=Cagliostro&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Anaheim:wght@400..800&family=Cagliostro&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
     </style>
     <title>Lumina AI</title>
-  </head>
+</head>
 
-  <body data-authenticated="{{ 'true' if user.is_authenticated else 'false' }}">
+<body data-authenticated="{{ 'true' if user.is_authenticated else 'false' }}">
+    <!-- Cabeçalho -->
     <header class="cabecalho">
-      <div class="logo">
-        <img src="\static\images\Lumina AI.png" alt="Logo da marca" />
-      </div>
-      <nav>
-        <a href="/sobre#sobre">Sobre</a>
-        <a href="/sobre#duvidas">Dúvidas frequentes</a>
-        <a href="/sobre#planos">Para empresas</a>
-        <a href="#contato">Contato</a>
-        <a href="#" class="botao">Entrar</a>
-        <a href="/cadastro" class="botao">Registre-se</a>
-      </nav>
-    </header>
-    {% with messages=get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        <div class="flash-messages">
-          {% for category, message in messages %}
-            <div class="flash-message {{ category }}">{{ message }}</div>
-          {% endfor %}
+        <div class="logo">
+            <img src="\static\images\Lumina AI.png" alt="Logo da marca" />
         </div>
-      {% endif %}
+        <nav>
+            <a href="#sobre">Sobre</a>
+            <a href="#duvidas">Dúvidas frequentes</a>
+            <a href="#planos">Para empresas</a>
+            <a href="#contato">Contato</a>
+            <a href="#" class="botao">Entrar</a>
+            <a href="/cadastro" class="botao">Registre-se</a>
+        </nav>
+    </header>
+
+    {% with messages=get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for category, message in messages %}
+        <div class="flash-message {{ category }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
     {% endwith %}
+
     <!-- Popup de Login -->
     <div id="popup-login" class="popup">
-      <div class="conteudo-popup">
-        <span class="botao-fechar">&times;</span>
-        <h2>Login</h2>
-        <form action="/login" method="post" class="formulario-login">
-          <div class="formulario-login">
-            <label for="email-login">E-mail</label>
-            <input type="email" id="email-login" name="email" placeholder="Seu e-mail" required />
-          </div>
-          <div class="formulario-login">
-            <label for="senha-login">Senha</label>
-            <input type="password" id="senha-login" name="password" placeholder="Sua senha" required />
-          </div>
-          <button type="submit" class="botao-popup">Entrar</button>
-        </form>
-      </div>
-    </div>
-    <section class="hero animar-ao-rolar">
-      <div class="conteudo-hero">
-        <img src="\static\images\pexels-googledeepmind-17483848.jpg" alt="Imagem da capa" class="logo" />
-        <div class="texto-hero">
-          <h1>Iluminando o caminho para um futuro com IA</h1>
-          <p>Os melhores cursos de inteligência artificial para estudantes e profissionais de qualquer área. Aprenda com especialistas, domine as tecnologias mais recentes e prepare-se para transformar sua carreira no mercado digital.</p>
-          <button onclick="location.href='#cursos'" class="botao-link">Conheça os cursos</button>
-          <button class="botao-link">Faça um teste</button>
+        <div class="conteudo-popup">
+            <span class="botao-fechar">&times;</span>
+            <h2>Login</h2>
+            <form action="/login" method="post" class="formulario-login">
+                <div class="formulario-login">
+                    <label for="email-login">E-mail</label>
+                    <input type="email" id="email-login" name="email" placeholder="Seu e-mail" required />
+                </div>
+                <div class="formulario-login">
+                    <label for="senha-login">Senha</label>
+                    <input type="password" id="senha-login" name="password" placeholder="Sua senha" required />
+                </div>
+                <button type="submit" class="botao-popup">Entrar</button>
+            </form>
         </div>
-      </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero animar-ao-rolar">
+        <div class="conteudo-hero">
+            <img src="\static\images\pexels-googledeepmind-17483848.jpg" alt="Imagem da capa" class="logo" />
+            <div class="texto-hero">
+                <h1>Iluminando o caminho para um futuro com IA</h1>
+                <p>Os melhores cursos de inteligência artificial para estudantes e profissionais de qualquer área.
+                    Aprenda com especialistas, domine as tecnologias mais recentes e prepare-se para transformar sua
+                    carreira no mercado digital.</p>
+                <button onclick="location.href='#cursos'" class="botao-link">Conheça os cursos</button>
+                <button class="botao-link">Faça um teste</button>
+            </div>
+        </div>
     </section>
     <section class="cursos animar-ao-rolar" id="cursos">
-      <h2>Cursos em destaque</h2>
-      <div id="mensagem-aviso" class="mensagem-aviso">
-        Você precisa estar logado para se inscrever em um curso.
-      </div>
-      <div class="cartoes-cursos">
-        {% for curso in cursos %}
-          <div class="cartao-curso">
-            <h3>{{ curso.titulo }}</h3>
-            <p>{{ curso.descricao }}</p>
-            <form action="{{ url_for('views.inscrever', curso_id=curso.id) }}" method="post" class="form-inscrever">
-              <button type="button" class="botao-inscrever">Inscreva-se</button>
-            </form>
-          </div>
-        {% endfor %}
-      </div>
-      <button class="botao-link" onclick="#">Conhecer todos os cursos</button>
+        <h2>Cursos em destaque</h2>
+        <div id="mensagem-aviso" class="mensagem-aviso">
+            Você precisa estar logado para se inscrever em um curso.
+        </div>
+
+        <!-- Cartões de Cursos -->
+        <div class="cartoes-cursos">
+            {% for curso in cursos %}
+            <div class="cartao-curso">
+                <h3>{{ curso.titulo }}</h3>
+                <p>{{ curso.descricao }}</p>
+                <form action="{{ url_for('views.inscrever', curso_id=curso.id) }}" method="post" class="form-inscrever">
+                    <button type="button" class="botao-inscrever">Inscreva-se</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+        <button class="botao-link" onclick="#">Conhecer todos os cursos</button>
     </section>
 
+    <!-- Metodologia -->
     <section class="metodologia animar-ao-rolar">
-      <h2>Conheça a metodologia da Lumina AI</h2>
-      <div class="linha-do-tempo">
-        <div class="etapa-linha-do-tempo">
-          <div class="icone">
-            <img src="/static/images/videocam_40dp_000000_FILL0_wght400_GRAD0_opsz40.svg" alt="Ícone de aulas ao vivo" />
-          </div>
-          <h3>Conteúdo Diversificado</h3>
-          <p>Aulas ao vivo, vídeos gravados e materiais interativos para todos os estilos de aprendizado.</p>
+        <h2>Conheça a metodologia da Lumina AI</h2>
+        <div class="linha-do-tempo">
+            <div class="etapa-linha-do-tempo">
+                <div class="icone">
+                    <img src="/static/images/videocam_40dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
+                        alt="Ícone de aulas ao vivo" />
+                </div>
+                <h3>Conteúdo Diversificado</h3>
+                <p>Aulas ao vivo, vídeos gravados e materiais interativos para todos os estilos de aprendizado.</p>
+            </div>
+            <div class="etapa-linha-do-tempo">
+                <div class="icone">
+                    <img src="/static/images/groups_40dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
+                        alt="Ícone de suporte" />
+                </div>
+                <h3>Instrutores Especializados</h3>
+                <p>Aprenda com profissionais experientes e reconhecidos no mercado de inteligência artificial.</p>
+            </div>
+            <div class="etapa-linha-do-tempo">
+                <div class="icone">
+                    <img src="/static/images/note_stack_40dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
+                        alt="Ícone de projetos" />
+                </div>
+                <h3>Foco na Prática</h3>
+                <p>Realize projetos reais e aplique os conhecimentos adquiridos em situações práticas.</p>
+            </div>
+            <div class="etapa-linha-do-tempo">
+                <div class="icone">
+                    <img src="/static/images/id_card_40dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
+                        alt="Ícone de certificados" />
+                </div>
+                <h3>Certificados Relevantes</h3>
+                <p>Receba certificados reconhecidos pelo mercado para impulsionar sua carreira.</p>
+            </div>
         </div>
-        <div class="etapa-linha-do-tempo">
-          <div class="icone">
-            <img src="/static/images/groups_40dp_000000_FILL0_wght400_GRAD0_opsz40.svg" alt="Ícone de suporte" />
-          </div>
-          <h3>Instrutores Especializados</h3>
-          <p>Aprenda com profissionais experientes e reconhecidos no mercado de inteligência artificial.</p>
-        </div>
-        <div class="etapa-linha-do-tempo">
-          <div class="icone">
-            <img src="/static/images/note_stack_40dp_000000_FILL0_wght400_GRAD0_opsz40.svg" alt="Ícone de projetos" />
-          </div>
-          <h3>Foco na Prática</h3>
-          <p>Realize projetos reais e aplique os conhecimentos adquiridos em situações práticas.</p>
-        </div>
-        <div class="etapa-linha-do-tempo">
-          <div class="icone">
-            <img src="/static/images/id_card_40dp_000000_FILL0_wght400_GRAD0_opsz40.svg" alt="Ícone de certificados" />
-          </div>
-          <h3>Certificados Relevantes</h3>
-          <p>Receba certificados reconhecidos pelo mercado para impulsionar sua carreira.</p>
-        </div>
-      </div>
     </section>
+
+    <!-- Sobre -->
+    <section id="sobre" class="sobre animar-ao-rolar">
+        <h2>Sobre a Lumina AI</h2>
+        <p>A Lumina AI é uma empresa dedicada a capacitar indivíduos e organizações com o conhecimento e as ferramentas
+            necessárias para prosperar na era da inteligência artificial. Nossa missão é iluminar o caminho para um
+            futuro mais inovador e inclusivo, oferecendo cursos de alta qualidade e soluções personalizadas.</p>
+        <p>Com uma equipe de especialistas em IA e tecnologia, estamos comprometidos em fornecer uma experiência de
+            aprendizado prática, ética e transformadora. Junte-se a nós para explorar as possibilidades infinitas da
+            inteligência artificial.</p>
+        <video src="\static\videos\apresentacao.mp4" controls muted preload="metadata" width="600"
+            height="auto"></video>
+    </section>
+
+    <!-- Dúvidas Frequentes -->
+    <section id="duvidas" class="duvidas animar-ao-rolar">
+        <h2>Dúvidas Frequentes</h2>
+        <div class="faq">
+            <details>
+                <summary> O que é a Lumina AI?</summary>
+                <p>A Lumina AI é uma plataforma de aprendizado que oferece cursos e soluções em inteligência artificial
+                    para estudantes, profissionais e empresas.</p>
+            </details>
+            <details>
+                <summary> Preciso de conhecimento prévio para fazer os cursos?</summary>
+                <p>Não! Temos cursos para todos os níveis, desde iniciantes até profissionais avançados.</p>
+            </details>
+            <details>
+                <summary> Os cursos oferecem certificados?</summary>
+                <p>Sim, todos os nossos cursos oferecem certificados reconhecidos pelo mercado após a conclusão.</p>
+            </details>
+            <details>
+                <summary> Quais são os métodos de pagamento aceitos?</summary>
+                <p>Aceitamos pagamentos via cartão de crédito, boleto bancário e transferência bancária.</p>
+            </details>
+            <details>
+                <summary> Os cursos são 100% online?</summary>
+                <p>Sim, todos os nossos cursos são totalmente online, permitindo que você estude no seu próprio ritmo.
+                </p>
+            </details>
+            <details>
+                <summary> Posso acessar os cursos após a conclusão?</summary>
+                <p>Sim, você terá acesso vitalício ao conteúdo dos cursos que adquirir.</p>
+            </details>
+        </div>
+    </section>
+
+    <!-- Planos para Empresas -->
+    <section id="planos" class="planos animar-ao-rolar">
+        <h2>Planos para Empresas</h2>
+        <p>A Lumina AI oferece soluções personalizadas para empresas que desejam capacitar suas equipes em inteligência
+            artificial. Nossos planos incluem:</p>
+        <ul>
+            <li>Treinamentos personalizados para equipes.</li>
+            <li>Consultoria em projetos de IA.</li>
+            <li>Workshops práticos com especialistas.</li>
+        </ul>
+        <p>Entre em contato conosco para saber mais sobre como podemos ajudar sua empresa a se destacar no mercado
+            digital.</p>
+        <a href="/#contato" class="botao-link">Fale Conosco</a>
+    </section>
+
+    <!-- Depoimentos -->
     <section class="depoimentos">
-      <h2>O que nossos alunos dizem</h2>
-      <div class="grade-depoimentos">
-        <button class="depoimento-anterior"><</button>
-        <div class="cartao-depoimento">
-          <img src="/static/images/pexels-divinetechygirl-1181391.jpg" alt="Foto do aluno" />
-          <p>"Os cursos da Lumina AI transformaram minha carreira. Agora, estou preparado para enfrentar os desafios do mercado digital."</p>
-          <span>- João Borges</span>
+        <h2>O que nossos alunos dizem</h2>
+        <div class="grade-depoimentos">
+            <button class="depoimento-anterior">
+                < </button>
+                    <div class="cartao-depoimento">
+                        <img src="/static/images/pexels-divinetechygirl-1181391.jpg" alt="Foto do aluno" />
+                        <p>"Os cursos da Lumina AI transformaram minha carreira. Agora, estou preparado para enfrentar
+                            os desafios do mercado digital."</p>
+                        <span>- João Borges</span>
+                    </div>
+                    <div class="cartao-depoimento">
+                        <img src="/static/images/pexels-da-na-461418424-31448513.jpg" alt="Foto do aluno" />
+                        <p>"Aprendi a usar IA de forma prática e ética. Recomendo a todos que queiram se destacar no
+                            mercado."</p>
+                        <span>- Clara Pereira</span>
+                    </div>
+                    <div class="cartao-depoimento">
+                        <img src="/static/images/pexels-fauxels-3184611.jpg" alt="Foto do aluno" />
+                        <p>"A metodologia prática e os instrutores experientes fizeram toda a diferença no meu
+                            aprendizado."</p>
+                        <span>- Carlos dos Santos</span>
+                    </div>
+                    <button class="proximo-depoimento"> > </button>
         </div>
-        <div class="cartao-depoimento">
-          <img src="/static/images/pexels-da-na-461418424-31448513.jpg" alt="Foto do aluno" />
-          <p>"Aprendi a usar IA de forma prática e ética. Recomendo a todos que queiram se destacar no mercado."</p>
-          <span>- Clara Pereira</span>
-        </div>
-        <div class="cartao-depoimento">
-          <img src="/static/images/pexels-fauxels-3184611.jpg" alt="Foto do aluno" />
-          <p>"A metodologia prática e os instrutores experientes fizeram toda a diferença no meu aprendizado."</p>
-          <span>- Carlos dos Santos</span>
-        </div>
-        <button class="proximo-depoimento">></button>
-      </div>
     </section>
+
+    <!-- Contato -->
     <section id="contato" class="contato">
-      <h2>Fale conosco</h2>
-      <form action="#" method="post" class="formulario-contato">
-        <div class="grupo-formulario">
-          <label for="name">Nome</label>
-          <input type="text" id="name" name="name" placeholder="Seu nome" required />
-        </div>
-        <div class="grupo-formulario">
-          <label for="email">E-mail</label>
-          <input type="email" id="email" name="email" placeholder="Seu e-mail" required />
-        </div>
-        <div class="grupo-formulario">
-          <label for="message">Mensagem</label>
-          <textarea id="message" name="message" rows="5" placeholder="Sua mensagem" required></textarea>
-        </div>
-        <button type="submit" class="botao-contato">Enviar</button>
-      </form>
+        <h2>Fale conosco</h2>
+        <form action="#" method="post" class="formulario-contato">
+            <div class="grupo-formulario">
+                <label for="name">Nome</label>
+                <input type="text" id="name" name="name" placeholder="Seu nome" required />
+            </div>
+            <div class="grupo-formulario">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="Seu e-mail" required />
+            </div>
+            <div class="grupo-formulario">
+                <label for="message">Mensagem</label>
+                <textarea id="message" name="message" rows="5" placeholder="Sua mensagem" required></textarea>
+            </div>
+            <button type="submit" class="botao-contato">Enviar</button>
+        </form>
     </section>
+
     <!-- Popup de Confirmação -->
     <div id="popup-confirmacao" class="popup">
-      <div class="conteudo-popup">
-        <span class="botao-fechar">&times;</span>
-        <h2>Mensagem Enviada!</h2>
-        <p>
-          Obrigado por entrar em contato.<br />
-          Responderemos em breve.
-        </p>
-      </div>
+        <div class="conteudo-popup">
+            <span class="botao-fechar">&times;</span>
+            <h2>Mensagem Enviada!</h2>
+            <p>
+                Obrigado por entrar em contato.<br />
+                Responderemos em breve.
+            </p>
+        </div>
     </div>
 
+    <!-- Rodapé -->
     <footer>
-      <div class="conteudo-rodape">
-        <img src="/static/images/Iluminando o caminho para um futuro com IA.png" alt="" />
-      </div>
-      <div class="conteudo-rodape">
-        <p>&copy; 2025 Lumina AI. Todos os direitos reservados.</p>
-        <nav>
-          <a href="#">Política de Privacidade</a>
-          <a href="#">Termos de Uso</a>
-        </nav>
-      </div>
+        <div class="conteudo-rodape">
+            <img src="/static/images/Iluminando o caminho para um futuro com IA.png" alt="" />
+        </div>
+        <div class="conteudo-rodape">
+            <p>&copy; 2025 Lumina AI. Todos os direitos reservados.</p>
+            <nav>
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Termos de Uso</a>
+            </nav>
+        </div>
     </footer>
     <script src="\static\main.js"></script>
-  </body>
-  
+</body>
+
 </html>
