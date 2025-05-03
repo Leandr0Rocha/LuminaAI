@@ -23,9 +23,20 @@
             <a href="#planos">Para empresas</a>
             <a href="#contato">Contato</a>
             <a href="{{ url_for('views.logout') }}" class="botao">Sair</a>
-            <a href="#" class="botao">Página do aluno</a>
+            <a href="#" class="botao">Área do aluno</a>
+            <a href="#" id="botao-excluir" onclick="confirmarExclusao(event)">Excluir Conta</a>
+            <form id="form-excluir-conta" action="{{ url_for('views.excluir_conta') }}" method="post" style="display: none;">
+            </form>
         </nav>
     </header>
+    <!-- Modal de Confirmação -->
+    <div id="modal-confirmacao" class="modal" style="display: none;">
+        <div class="modal-conteudo">
+            <p>Tem certeza de que deseja excluir sua conta? Esta ação não pode ser desfeita.</p>
+            <button id="confirmar-exclusao" class="botao-confirmar">Sim, excluir</button>
+            <button id="cancelar-exclusao" class="botao-cancelar">Cancelar</button>
+        </div>
+    </div>
     {% with messages=get_flashed_messages(with_categories=true) %}
     {% if messages %}
     <div class="flash-messages">
@@ -45,7 +56,6 @@
                     Aprenda com especialistas, domine as tecnologias mais recentes e prepare-se para transformar sua
                     carreira no mercado digital.</p>
                 <button onclick="location.href='#cursos'" class="botao-link">Conheça os cursos</button>
-                <button class="botao-link">Faça um teste</button>
             </div>
         </div>
     </section>
@@ -167,7 +177,7 @@
         </ul>
         <p>Entre em contato conosco para saber mais sobre como podemos ajudar sua empresa a se destacar no mercado
             digital.</p>
-        <a href="/#contato" class="botao-link">Fale Conosco</a>
+        <a href="#contato" class="botao-link">Fale Conosco</a>
     </section>
 
     <!-- Depoimentos -->
@@ -198,37 +208,34 @@
         </div>
     </section>
 
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+                <div class="flash-message {{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
     <!-- Contato -->
     <section id="contato" class="contato">
         <h2>Fale conosco</h2>
-        <form action="#" method="post" class="formulario-contato">
+        <form action="/contato" method="post" class="formulario-contato">
             <div class="grupo-formulario">
-                <label for="name">Nome</label>
+                <label for="name">Nome*</label>
                 <input type="text" id="name" name="name" placeholder="Seu nome" required />
             </div>
             <div class="grupo-formulario">
-                <label for="email">E-mail</label>
+                <label for="email">E-mail*</label>
                 <input type="email" id="email" name="email" placeholder="Seu e-mail" required />
             </div>
             <div class="grupo-formulario">
-                <label for="message">Mensagem</label>
+                <label for="message">Mensagem*</label>
                 <textarea id="message" name="message" rows="5" placeholder="Sua mensagem" required></textarea>
             </div>
             <button type="submit" class="botao-contato">Enviar</button>
         </form>
     </section>
-
-    <!-- Popup de Confirmação -->
-    <div id="popup-confirmacao" class="popup">
-        <div class="conteudo-popup">
-            <span class="botao-fechar">&times;</span>
-            <h2>Mensagem Enviada!</h2>
-            <p>
-                Obrigado por entrar em contato.<br />
-                Responderemos em breve.
-            </p>
-        </div>
-    </div>
 
     <footer>
         <div class="conteudo-rodape">
@@ -242,7 +249,7 @@
             </nav>
         </div>
     </footer>
-    <script src="\static\main.js"></script>
+    <script src="/static/main.js"></script>
 </body>
 
 </html>

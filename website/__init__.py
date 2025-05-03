@@ -22,7 +22,7 @@ def create_app():
 
     # Importa os modelos para criar as tabelas dentro do contexto do app
     with app.app_context():
-        from .models import User, Curso
+        from .models import User, Curso, Contato
         db.create_all()
 
     # Configura o gerenciador de login

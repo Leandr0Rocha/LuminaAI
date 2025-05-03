@@ -26,3 +26,11 @@ user_curso = db.Table(
     db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
     db.Column('curso_id', db.Integer, db.ForeignKey('curso.id'))
 )
+
+class Contato(db.Model):
+    """Modelo para armazenar mensagens do formulário de contato."""
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(150), nullable=False)
+    email = db.Column(db.String(150), nullable=False)
+    mensagem = db.Column(db.Text, nullable=False)
+    data_envio = db.Column(db.DateTime(timezone=True), default=func.now())

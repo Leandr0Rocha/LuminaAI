@@ -30,30 +30,34 @@
         <h2>Cadastro de Usuário</h2>
         <form action="/cadastro" method="post" class="formulario-cadastro">
             <div class="grupo-cadastro">
-                <label for="nome-completo">Nome Completo</label>
-                <input type="text" id="nome-completo" name="nome-completo" placeholder="Seu nome completo" required>
+                <label for="nome-completo">Nome*</label>
+                <input type="text" id="nome-completo" name="nome-completo" placeholder="Digite seu nome completo" required minlength="2">
             </div>
             <div class="grupo-cadastro">
-                <label for="nome-usuario">Nome de Usuário</label>
-                <input type="text" id="nome-usuario" name="nome-usuario" placeholder="Seu nome de usuário" required>
+                <label for="nome-usuario">Nome de Usuário*</label>
+                <input type="text" id="nome-usuario" name="nome-usuario" placeholder="Escolha um nome de usuário" required minlength="3">
             </div>
             <div class="grupo-cadastro">
-                <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" placeholder="Seu e-mail" required>
+                <label for="email">E-mail*</label>
+                <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$">
             </div>
             <div class="grupo-cadastro">
-                <label for="senha">Senha</label>
-                <input type="password" id="senha" name="senha" placeholder="Sua senha" required>
+                <label for="senha">Senha*</label>
+                <input type="password" id="senha" name="senha" placeholder="Sua senha" required minlength="8" 
+                    pattern="(?=.*[0-9])(?=.*[A-Z]).{8,}" 
+                    title="A senha deve ter pelo menos 8 caracteres, incluindo um número e uma letra maiúscula.">
             </div>
             <div class="grupo-cadastro">
-                <label for="repetir-senha">Repetir Senha</label>
+                <label for="repetir-senha">Repetir Senha*</label>
                 <input type="password" id="repetir-senha" name="repetir-senha" placeholder="Repita sua senha" required>
             </div>
             <div class="grupo-cadastro-checkbox">
-                <label for="termos"><input type="checkbox" id="termos" name="termos" required>Permito que este site
-                    armazene os dados preenchidos neste formulário.</label>
+                <label for="termos">
+                    <input type="checkbox" id="termos" name="termos" required>
+                    Permito que este site armazene os dados preenchidos neste formulário.
+                </label>
             </div>
-            <button type="submit" class="botao-cadastro" href="http://127.0.0.1:5000/cadastro">Registrar</button>
+            <button type="submit" class="botao-cadastro">Registrar</button>
         </form>
     </section>
     

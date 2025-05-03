@@ -1,8 +1,9 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
-from .models import User, Curso
+from .models import User, Curso, Contato
 from . import db
+import re
 
 views = Blueprint('views', __name__)
 
@@ -86,6 +87,17 @@ def logout():
     return redirect(url_for('views.index'))
 
 
+@views.route('/excluir-conta', methods=['POST'])
+@login_required
+def excluir_conta():
+    """Exclui a conta do usuário logado."""
+    user = current_user
+    db.session.delete(user)
+    db.session.commit()
+    flash('Sua conta foi excluída com sucesso.', category='success')
+    return redirect(url_for('views.index'))
+
+
 @views.route('/inscrever/<int:curso_id>', methods=['POST'])
 @login_required
 def inscrever(curso_id):
@@ -103,3 +115,34 @@ def inscrever(curso_id):
         flash(f'Você se inscreveu no curso "{curso.titulo}"!', category='success')
 
     return redirect(url_for('views.home'))  # Redireciona para a página home
+
+
+@views.route('/contato', methods=['POST'])
+def contato():
+    nome = request.form.get('name')
+    email = request.form.get('email')
+    mensagem = request.form.get('message')
+
+    # Validação dos campos
+    if not nome:
+        flash('O campo "Nome" é obrigatório.', category='error')
+    if not email:
+        flash('O campo "E-mail" é obrigatório.', category='error')
+    elif not re.match(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', email):
+        flash('Por favor, insira um e-mail válido.', category='error')
+    if not mensagem:
+        flash('O campo "Mensagem" é obrigatório.', category='error')
+    elif len(mensagem) < 10:
+        flash('A mensagem deve ter pelo menos 10 caracteres.', category='error')
+
+    # Se houver erros, redireciona para a página inicial
+    if '_flashes' in session:
+        return redirect(url_for('views.index'))
+
+    # Salva a mensagem no banco de dados
+    novo_contato = Contato(nome=nome, email=email, mensagem=mensagem)
+    db.session.add(novo_contato)
+    db.session.commit()
+
+    flash('Mensagem enviada com sucesso! Entraremos em contato em breve.', category='success')
+    return redirect(url_for('views.index'))
