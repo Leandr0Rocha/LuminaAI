@@ -1,0 +1,104 @@
+
+/* Botão de excluir */
+#botao-excluir {
+    background-color: hsl(0, 70%, 40%);
+    color: hsl(0, 0%, 100%);
+    border: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#botao-excluir:hover {
+    background-color: hsl(0, 70%, 50%);
+}
+
+/* Modal de Confirmação */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-conteudo {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-conteudo p {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.botao-confirmar {
+    background-color: hsl(0, 70%, 50%);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.botao-confirmar:hover {
+    background-color: hsl(0, 70%, 60%);
+}
+
+.botao-cancelar {
+    background-color: hsl(0, 0%, 80%);
+    color: black;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.botao-cancelar:hover {
+    background-color: hsl(0, 0%, 70%);
+}
+
+/* Área do aluno */
+.area-aluno {
+    text-align: center;
+    padding: 50px;
+}
+
+.area-aluno h2 {
+    font-family: "Cagliostro", sans-serif;
+    font-size: 36px;
+    margin-bottom: 30px;
+    color: hsl(215, 78%, 36%);
+}
+
+.info-curso {
+    list-style: none;
+    margin: 10px 10px 30px;
+    gap: 15px;
+    font-weight: 700;
+    font-size: 20px;
+    color: hsl(0, 0%, 20%);
+    background-color: hsl(206, 41%, 95%);
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.capitulos {
+    list-style:decimal;
+    margin: 10px;
+    gap: 5px;
+    font-size: 18px;
+    color: hsl(0, 0%, 30%);
+    padding: 20px;
+}

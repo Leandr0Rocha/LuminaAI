@@ -117,6 +117,14 @@ def inscrever(curso_id):
     return redirect(url_for('views.home'))  # Redireciona para a página home
 
 
+@views.route('/curso/<int:curso_id>')
+@login_required
+def curso(curso_id):
+    curso = Curso.query.get_or_404(curso_id)
+    return render_template('curso.html', curso=curso, user=current_user)
+
+
+
 @views.route('/contato', methods=['POST'])
 def contato():
     nome = request.form.get('name')

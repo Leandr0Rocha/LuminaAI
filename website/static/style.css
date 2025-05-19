@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Anaheim:wght@400..800&family=Cagliostro&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 /* Geral */
 * {
     font-family: "Anaheim", sans-serif;
@@ -43,6 +45,10 @@ header {
     width: 60px;
 }
 
+.logo img:hover {
+    cursor: pointer;
+}
+
 header nav a {
     font-size: 18px;
     margin: 0px 10px;
@@ -69,142 +75,6 @@ header nav .botao:hover {
     color: hsl(215, 78%, 41%);
 }
 
-/* Popup de Login */
-.popup {
-    display: none;
-    /* Inicialmente escondido */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    /* Fundo escuro semi-transparente */
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.conteudo-popup {
-    background-color: hsl(0, 0%, 100%);
-    padding: 30px;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 40vw;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-.conteudo-popup h2 {
-    font-family: "Cagliostro", sans-serif;
-    font-size: 36px;
-    color: hsl(215, 78%, 36%);
-    margin: 20px;
-}
-
-.conteudo-popup p{
-    margin: 20px;
-    font-size: 18px;
-}
-
-.formulario-login {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    margin-bottom: 15px;
-}
-
-.formulario-login label {
-    font-size: 16px;
-    color: hsl(0, 0%, 20%);
-    margin-bottom: 5px;
-}
-
-.formulario-login input {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid hsl(0, 0%, 80%);
-    border-radius: 5px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.formulario-login input:focus {
-    border-color: hsl(215, 78%, 36%);
-    outline: none;
-}
-
-/** Botão de login */
-.botao-popup {
-    background-color: hsl(48, 100%, 67%);
-    color: hsl(0, 0%, 0%);
-    border: none;
-    padding: 10px 20px;
-    font-size: 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 40%;
-    align-self: center;
-}
-
-.botao-popup:hover {
-    background-color: hsl(48, 100%, 72%);
-    color: hsl(0, 0%, 10%);
-}
-
-.botao-fechar {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 50px;
-    font-weight: bold;
-    color: hsl(0, 0%, 100%);
-    cursor: pointer;
-}
-
-.botao-fechar:hover {
-    color: hsl(0, 0%, 90%);
-}
-
-/* Mensagens Flash */
-.flash-messages {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    z-index: 1000;
-}
-
-/* Estilização para mensagens flash */
-.flash-message {
-    padding: 10px 15px;
-    margin: 10px auto;
-    max-width: 40vw;
-    border-radius: 5px;
-    font-size: 16px;
-    text-align: center;
-}
-
-/* Mensagem de sucesso */
-.flash-message.success {
-    background-color: hsl(120, 40%, 85%);
-    color: hsl(120, 40%, 20%);
-    border: 1px solid hsl(120, 40%, 50%);
-}
-
-/* Mensagem de erro */
-.flash-message.error {
-    background-color: hsl(0, 70%, 90%);
-    color: hsl(0, 70%, 30%);
-    border: 1px solid hsl(0, 70%, 50%);
-}
-
-/* Mensagem de informação */
-.flash-message.info {
-    background-color: hsl(210, 60%, 90%);
-    color: hsl(210, 60%, 30%);
-    border: 1px solid hsl(210, 60%, 50%);
-}
 
 /* Hero */
 .hero {
@@ -349,134 +219,114 @@ header nav .botao:hover {
     background-color: hsl(48, 100%, 72%);
 }
 
-/* Metodologia */
-.metodologia {
-    text-align: center;
-    padding: 50px;
-    background-color: hsl(215, 78%, 41%);
-}
-
-.metodologia h2 {
-    font-family: "Cagliostro", sans-serif;
-    font-size: 36px;
-    margin-bottom: 30px;
-    color: hsl(0, 0%, 100%);
-}
-
-.linha-do-tempo {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.etapa-linha-do-tempo {
-    background: #fff;
-    border: none;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    transition: transform 0.3s ease;
-    width: auto;
-    margin: 0 auto;
-}
-
-.etapa-linha-do-tempo:hover {
-    transform: translateY(-10px);
-}
-
-.etapa-linha-do-tempo .icone img {
-    padding: 10px;
-}
-
-.etapa-linha-do-tempo h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
-    color: hsl(0, 0%, 10%);
-}
-
-.etapa-linha-do-tempo p {
-    font-size: 16px;
-    color: hsl(0, 0%, 20%);
-    line-height: 1.5;
-}
-
-/* Testemunhos */
-.depoimentos {
-    padding: 50px;
-    text-align: center;
-    background-color: hsl(206, 41%, 95%);
-}
-
-.depoimentos h2 {
-    font-family: "Cagliostro", sans-serif;
-    font-size: 36px;
-    color: hsl(0, 0%, 10%);
-    margin-bottom: 30px;
-}
-
-.grade-depoimentos {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+/* Popups */
+.popup {
+    display: none;
+    /* Inicialmente escondido */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fundo escuro semi-transparente */
     justify-content: center;
     align-items: center;
+    z-index: 1000;
 }
 
-.cartao-depoimento {
-    background-color: hsl(0, 0%, 100%, 0.8);
-    width: 50vw;
-    padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    text-align: center;
-}
-
-.cartao-depoimento img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin: 10px;
-    object-fit: cover;
-}
-
-.cartao-depoimento p {
-    font-style: italic;
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: hsl(0, 0%, 20%);
-}
-
-.cartao-depoimento span {
-    font-size: 20px;
-    font-weight: bold;
-    color: hsl(215, 78%, 36%);
-}
-
-.depoimentos button {
+.conteudo-popup {
     background-color: hsl(0, 0%, 100%);
-    color: hsl(0, 0%, 70%);
-    border: none;
-    padding: 10px;
-    font-size: 24px;
-    border-radius: 50%;
-    cursor: pointer;
-    margin: 10px;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 40vw;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-.depoimentos button:hover {
-    background-color: hsl(0, 0%, 95%);
+.conteudo-popup h2 {
+    font-family: "Cagliostro", sans-serif;
+    font-size: 36px;
+    color: hsl(215, 78%, 36%);
+    margin: 20px;
+}
+
+.conteudo-popup p{
+    margin: 20px;
+    font-size: 18px;
+}
+
+/** Botão popup */
+.botao-popup {
+    background-color: hsl(48, 100%, 67%);
+    color: hsl(0, 0%, 0%);
+    border: none;
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 40%;
+    align-self: center;
+}
+
+.botao-popup:hover {
+    background-color: hsl(48, 100%, 72%);
+    color: hsl(0, 0%, 10%);
+}
+
+.botao-fechar {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 50px;
+    font-weight: bold;
+    color: hsl(0, 0%, 100%);
+    cursor: pointer;
+}
+
+.botao-fechar:hover {
+    color: hsl(0, 0%, 90%);
+}
+
+/* Mensagens Flash */
+.flash-messages {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+}
+
+/* Estilização para mensagens flash */
+.flash-message {
+    padding: 10px 15px;
+    margin: 10px auto;
+    max-width: 40vw;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Mensagem de sucesso */
+.flash-message.success {
+    background-color: hsl(120, 40%, 85%);
+    color: hsl(120, 40%, 20%);
+    border: 1px solid hsl(120, 40%, 50%);
+}
+
+/* Mensagem de erro */
+.flash-message.error {
+    background-color: hsl(0, 70%, 90%);
+    color: hsl(0, 70%, 30%);
+    border: 1px solid hsl(0, 70%, 50%);
+}
+
+/* Mensagem de informação */
+.flash-message.info {
+    background-color: hsl(210, 60%, 90%);
+    color: hsl(210, 60%, 30%);
+    border: 1px solid hsl(210, 60%, 50%);
 }
 
 /* Contato */
@@ -584,88 +434,7 @@ footer nav a:hover {
     color: hsl(210, 60%, 95%);
 }
 
-/* Página de cadastro*/
-.cadastro {
-    padding: 40px;
-    text-align: center;
-    background-color: hsl(0, 0%, 100%);
-}
-
-.cadastro h2 {
-    font-family: "Cagliostro", sans-serif;
-    font-size: 36px;
-    color: hsl(215, 78%, 36%);
-    margin-bottom: 30px;
-}
-
-.formulario-cadastro {
-    max-width: 40vw;
-    margin: 0 auto;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.grupo-cadastro-checkbox {
-    display: flex;
-    align-content: center;
-    margin: 5px;
-    font-size: 16px;
-}
-
-.grupo-cadastro-checkbox input[type="checkbox"] {
-    border-radius: 5px;
-    width: 16px;
-    height: 16px;
-}
-
-.grupo-cadastro label {
-    font-size: 16px;
-    color: hsl(0, 0%, 10%);
-    margin: 5px;
-}
-
-.grupo-cadastro input[type="text"],
-.grupo-cadastro input[type="email"],
-.grupo-cadastro input[type="password"] {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid hsl(0, 0%, 80%);
-    border-radius: 5px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.grupo-cadastro input[type="checkbox"] {
-    margin: 10px;
-}
-
-.grupo-cadastro input:focus {
-    border-color: hsl(215, 78%, 36%);
-    outline: none;
-}
-
-.botao-cadastro {
-    background-color: hsl(48, 100%, 67%);
-    color: hsl(0, 0%, 0%);
-    border: none;
-    padding: 10px 20px;
-    font-size: 18px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 50%;
-    align-self: center;
-}
-
-.botao-cadastro:hover {
-    background-color: hsl(48, 100%, 72%);
-    color: hsl(0, 0%, 10%);
-}
-
-/* Botão de voltar */
-
+/* Botão de voltar ao topo */
 .voltar-ao-topo {
     position: fixed;
     bottom: 20px;
@@ -686,194 +455,6 @@ footer nav a:hover {
 
 .voltar-ao-topo:hover {
     background-color: hsl(0, 0%, 90%);
-}
-
-/* Seção Sobre */
-.sobre {
-    padding: 50px;
-    background-color: hsl(206, 41%, 95%);
-    text-align: center;
-}
-
-.sobre h2 {
-    font-family: "Cagliostro", sans-serif;
-    font-size: 36px;
-    color: hsl(215, 78%, 36%);
-    margin-bottom: 30px;
-}
-
-.sobre p {
-    font-size: 18px;
-    color: hsl(0, 0%, 20%);
-    line-height: 1.5;
-    max-width: 50vw;
-    margin: 0 auto 20px;
-
-}
-
-/* Estilização para Dúvidas Frequentes */
-.duvidas {
-    padding: 50px;
-    background-color: hsl(215, 78%, 36%);
-    text-align: center;
-}
-
-.duvidas h2 {
-    font-family: "Cagliostro", sans-serif;
-    font-size: 36px;
-    color: hsl(0, 0%, 100%);
-    margin-bottom: 30px;
-}
-
-.faq {
-    max-width: 50vw;
-    margin: 0 auto;
-    text-align: left;
-}
-
-.faq details {
-    background-color: hsl(215, 78%, 46%, 0.8);
-    color: hsl(0, 0%, 100%);
-    border-radius: 8px;
-    margin: 15px;
-    padding: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
-
-.faq details:hover {
-    background-color: hsl(215, 78%, 51%, 0.8);
-    transform: scale(1.02);
-}
-
-.faq summary {
-    font-size: 20px;
-    font-weight: bold;
-    color: hsl(48, 100%, 67%);
-    margin: 10px;
-    outline: none;
-}
-
-.faq summary:hover {
-    color: hsl(48, 100%, 72%);
-}
-
-.faq details[open] summary {
-    color: hsl(48, 100%, 72%);
-}
-
-.faq details p {
-    font-size: 18px;
-    color: hsl(0, 0%, 100%);
-    margin: 10px;
-    line-height: 1.5;
-}
-
-/* Seção Planos para Empresas */
-.planos {
-    padding: 50px;
-    background-color: hsl(238, 69%, 22%);
-    color: hsl(0, 0%, 100%);
-    text-align: center;
-}
-
-.planos h2 {
-    font-family: "Cagliostro", sans-serif;
-    font-size: 36px;
-    margin-bottom: 30px;
-}
-
-.planos p {
-    font-size: 18px;
-    line-height: 1.5;
-    margin-bottom: 20px;
-    max-width: 40vw;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.planos ul {
-    list-style-type: square;
-    margin: 0 auto;
-    padding: 10px;
-    max-width: 40vw;
-    text-align: left;
-}
-
-.planos ul li {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: hsl(48, 100%, 67%);
-}
-
-#botao-excluir {
-    background-color: hsl(0, 70%, 40%);
-    color: hsl(0, 0%, 100%);
-    border: none;
-    padding: 10px 16px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-#botao-excluir:hover {
-    background-color: hsl(0, 70%, 50%);
-}
-
-/* Modal de Confirmação */
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.modal-conteudo {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.modal-conteudo p {
-    margin-bottom: 20px;
-    font-size: 18px;
-}
-
-.botao-confirmar {
-    background-color: hsl(0, 70%, 50%);
-    color: white;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 10px;
-}
-
-.botao-confirmar:hover {
-    background-color: hsl(0, 70%, 60%);
-}
-
-.botao-cancelar {
-    background-color: hsl(0, 0%, 80%);
-    color: black;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.botao-cancelar:hover {
-    background-color: hsl(0, 0%, 70%);
 }
 
 /* Adaptações para telas menores */

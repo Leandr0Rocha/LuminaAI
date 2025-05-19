@@ -5,24 +5,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="\static\style.css" />
-    <link rel="icon" href="Flask-Web-App-Tutorial-main - Copia\website\static\images\Lumina AI.png" type="image/png" />
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Anaheim:wght@400..800&family=Cagliostro&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-    </style>
+    <link rel="stylesheet" href="\static\index.css" />
+    <link rel="icon" href="/static/images/favicon.ico" type="image/png" />
     <title>Lumina AI</title>
 </head>
 
 <body data-authenticated="{{ 'true' if user.is_authenticated else 'false' }}">
     <!-- Cabeçalho -->
     <header class="cabecalho">
-    <div class="logo">
+        <div class="logo" id="logo-header">
             <img src="\static\images\Lumina AI.png" alt="Logo da marca" />
         </div>
         <nav>
-            <a href="#sobre">Sobre</a>
-            <a href="#duvidas">Dúvidas frequentes</a>
-            <a href="#planos">Para empresas</a>
-            <a href="#contato">Contato</a>
+            <a href="#" class="nav-link" data-section="sobre">Sobre</a>
+            <a href="#" class="nav-link" data-section="duvidas">Dúvidas frequentes</a>
+            <a href="#" class="nav-link" data-section="planos">Para empresas</a>
+            <a href="#" class="nav-link" data-section="contato">Contato</a>
             <a href="#" class="botao">Entrar</a>
             <a href="/cadastro" class="botao">Registre-se</a>
         </nav>
@@ -57,7 +55,8 @@
             </form>
         </div>
     </div>
-
+    
+    <div id="main-content">
     <!-- Hero -->
     <section class="hero animar-ao-rolar">
         <div class="conteudo-hero">
@@ -131,6 +130,34 @@
         </div>
     </section>
 
+    <!-- Depoimentos -->
+    <section class="depoimentos">
+        <h2>O que nossos alunos dizem</h2>
+        <div class="grade-depoimentos">
+            <button class="depoimento-anterior">
+                < </button>
+                    <div class="cartao-depoimento">
+                        <img src="/static/images/pexels-divinetechygirl-1181391.jpg" alt="Foto do aluno" />
+                        <p>"Os cursos da Lumina AI transformaram minha carreira. Agora, estou preparado para enfrentar
+                            os desafios do mercado digital."</p>
+                        <span>- João Borges</span>
+                    </div>
+                    <div class="cartao-depoimento">
+                        <img src="/static/images/pexels-da-na-461418424-31448513.jpg" alt="Foto do aluno" />
+                        <p>"Aprendi a usar IA de forma prática e ética. Recomendo a todos que queiram se destacar no
+                            mercado."</p>
+                        <span>- Clara Pereira</span>
+                    </div>
+                    <div class="cartao-depoimento">
+                        <img src="/static/images/pexels-fauxels-3184611.jpg" alt="Foto do aluno" />
+                        <p>"A metodologia prática e os instrutores experientes fizeram toda a diferença no meu
+                            aprendizado."</p>
+                        <span>- Carlos dos Santos</span>
+                    </div>
+                    <button class="proximo-depoimento"> > </button>
+        </div>
+    </section></div>
+
     <!-- Sobre -->
     <section id="sobre" class="sobre animar-ao-rolar">
         <h2>Sobre a Lumina AI</h2>
@@ -189,35 +216,7 @@
         </ul>
         <p>Entre em contato conosco para saber mais sobre como podemos ajudar sua empresa a se destacar no mercado
             digital.</p>
-        <a href="/#contato" class="botao-link">Fale Conosco</a>
-    </section>
-
-    <!-- Depoimentos -->
-    <section class="depoimentos">
-        <h2>O que nossos alunos dizem</h2>
-        <div class="grade-depoimentos">
-            <button class="depoimento-anterior">
-                < </button>
-                    <div class="cartao-depoimento">
-                        <img src="/static/images/pexels-divinetechygirl-1181391.jpg" alt="Foto do aluno" />
-                        <p>"Os cursos da Lumina AI transformaram minha carreira. Agora, estou preparado para enfrentar
-                            os desafios do mercado digital."</p>
-                        <span>- João Borges</span>
-                    </div>
-                    <div class="cartao-depoimento">
-                        <img src="/static/images/pexels-da-na-461418424-31448513.jpg" alt="Foto do aluno" />
-                        <p>"Aprendi a usar IA de forma prática e ética. Recomendo a todos que queiram se destacar no
-                            mercado."</p>
-                        <span>- Clara Pereira</span>
-                    </div>
-                    <div class="cartao-depoimento">
-                        <img src="/static/images/pexels-fauxels-3184611.jpg" alt="Foto do aluno" />
-                        <p>"A metodologia prática e os instrutores experientes fizeram toda a diferença no meu
-                            aprendizado."</p>
-                        <span>- Carlos dos Santos</span>
-                    </div>
-                    <button class="proximo-depoimento"> > </button>
-        </div>
+        <a data-section="contato" class="botao-link nav-link">Fale Conosco</a>
     </section>
 
     {% with messages = get_flashed_messages(with_categories=true) %}

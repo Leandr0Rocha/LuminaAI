@@ -1,7 +1,7 @@
 # Lumina AI
 ![image](https://github.com/user-attachments/assets/b0ee0e05-1134-425e-adcd-2e57cd742119)
 
-Lumina AI é uma plataforma de aprendizado que oferece cursos e soluções em inteligência artificial para estudantes, profissionais e empresas. Este projeto combina uma interface web interativa com um backend robusto em Flask, integrando operações com banco de dados para gerenciar usuários, cursos e interações.
+Lumina AI é uma plataforma de aprendizado que oferece cursos e soluções em inteligência artificial para estudantes, profissionais e empresas. O projeto utiliza **Flask** como backend, **SQLite** como banco de dados e segue o padrão de APIs RESTful para comunicação e manipulação de dados.
 
 ---
 
@@ -12,14 +12,15 @@ Lumina AI é uma plataforma de aprendizado que oferece cursos e soluções em in
   - Página de cadastro e login para usuários.
   - Mensagens flash para feedback ao usuário (sucesso, erro, informações).
 
-- **Backend**:
-  - Gerenciamento de rotas para navegação e operações do usuário.
-  - Autenticação e autorização de usuários com `Flask-Login`.
-  - Inscrição em cursos e gerenciamento de dados do usuário.
+- **Backend (API RESTful)**:
+  - Rotas organizadas em Blueprints para melhor modularização.
+  - Endpoints RESTful para cadastro, login, inscrição em cursos, consulta de cursos e envio de mensagens de contato.
+  - Respostas e redirecionamentos em formato JSON ou HTML, conforme a necessidade da interface.
 
 - **Banco de Dados**:
-  - Integração com `Flask-SQLAlchemy` para persistência de dados.
-  - Tabelas para usuários, cursos e associações entre eles.
+  - Integração com **Flask-SQLAlchemy** para persistência de dados.
+  - Banco de dados **SQLite** para fácil configuração e portabilidade.
+  - Tabelas para usuários, cursos (com campos como duração, instrutor, capítulos, imagem) e associações entre eles.
 
 ---
 
@@ -27,65 +28,46 @@ Lumina AI é uma plataforma de aprendizado que oferece cursos e soluções em in
 
 - **Frontend**:
   - HTML5, CSS3
-  - JavaScript para interatividade (popups e mensagens flash)
+  - JavaScript para interatividade (popups, mensagens flash, animações)
 
 - **Backend**:
-  - Flask
-  - Flask-SQLAlchemy
-  - Flask-Login
+  - Flask (framework web Python)
+  - Flask-SQLAlchemy (ORM)
+  - Flask-Login (autenticação)
+  - APIs RESTful para manipulação de dados
 
 - **Banco de Dados**:
-  - SQLite (pode ser substituído por outro banco de dados, como PostgreSQL ou MySQL)
+  - SQLite (padrão, fácil de usar e embutido)
 
 ---
 
-## 🌐 Rotas do Backend
+## 🌐 Rotas RESTful do Backend
 
 ### Rotas Públicas
-- **`/`**: Página inicial (index).
-- **`/cadastro`**: Página de cadastro de novos usuários.
-- **`/login`**: Processa o login do usuário.
+- **`GET /`**: Página inicial (index) e listagem de cursos.
+- **`GET /cadastro`**: Página de cadastro de novos usuários.
+- **`POST /cadastro`**: Criação de novo usuário.
+- **`POST /login`**: Autenticação do usuário.
+- **`POST /contato`**: Envio de mensagem de contato.
 
 ### Rotas Protegidas (Requer Login)
-- **`/home`**: Página inicial para usuários logados, exibindo cursos disponíveis.
-- **`/logout`**: Faz logout do usuário.
-- **`/inscrever/<int:curso_id>`**: Inscreve o usuário logado em um curso específico.
-
----
-
-## 🖥️ Interface do Programa
-
-### Páginas Principais
-1. **Página Inicial (`/`)**:
-   - Exibe informações sobre a Lumina AI e os cursos disponíveis.
-   - Botões para navegação e login/cadastro.
-
-3. **Página de Cadastro (`/cadastro`)**:
-   - Formulário para criação de novos usuários.
-
-4. **Página Home (`/home`)**:
-   - Exibe cursos disponíveis para o usuário logado.
-   - Permite inscrição em cursos.
-
-5. **Página de Contato (`#contato`)**:
-   - Formulário para envio de mensagens diretamente para a equipe da Lumina AI.
-
-### Elementos Interativos
-- **Popups**:
-  - Confirmação de envio de mensagem no formulário de contato.
-- **Mensagens Flash**:
-  - Feedback visual para ações do usuário (ex.: sucesso no login, erro no cadastro).
+- **`GET /home`**: Página inicial para usuários logados, exibindo cursos disponíveis e área do aluno.
+- **`POST /inscrever/<int:curso_id>`**: Inscreve o usuário logado em um curso específico.
+- **`GET /curso/<int:curso_id>`**: Detalhes de um curso específico.
+- **`POST /excluir-conta`**: Exclui a conta do usuário logado.
+- **`GET /logout`**: Faz logout do usuário.
 
 ---
 
 ## ⚙️ Como Executar o Projeto
 
 ### Pré-requisitos
-- **Python**: Certifique-se de ter o Python 3.8 ou superior instalado. [Baixe aqui](https://www.python.org/downloads/).
-- **Pip**: O gerenciador de pacotes do Python (geralmente já vem com o Python).
-- **Virtualenv (opcional)**: Para criar um ambiente virtual isolado.
+- **Python 3.8+**
+- **Pip** (gerenciador de pacotes do Python)
+- **Virtualenv** (opcional, mas recomendado)
 
 ### Instalação
+
 1. **Clone o repositório**:
    ```bash
    git clone https://github.com/seu-usuario/lumina-ai.git
@@ -95,8 +77,9 @@ Lumina AI é uma plataforma de aprendizado que oferece cursos e soluções em in
 2. **Crie um ambiente virtual (opcional, mas recomendado)**:
    ```bash
    python -m venv venv
-   source venv/bin/activate  # No Linux/Mac
    venv\Scripts\activate     # No Windows
+   # ou
+   source venv/bin/activate  # No Linux/Mac
    ```
 
 3. **Instale as dependências**:
@@ -107,49 +90,30 @@ Lumina AI é uma plataforma de aprendizado que oferece cursos e soluções em in
 4. **Configure o banco de dados**:
    - Crie o banco de dados SQLite e as tabelas necessárias:
      ```bash
-     flask shell
-     >>> from website import db
-     >>> db.create_all()
-     >>> exit()
+     python
+     >>> from website import db, create_app
+     >>> app = create_app()
+     >>> with app.app_context():
+     ...     db.create_all()
+     ...     exit()
      ```
 
-5. **Execute o servidor Flask**:
+5. **(Opcional) Popule o banco com cursos iniciais**:
+   ```bash
+   python website/seed.py
+   ```
+
+6. **Execute o servidor Flask**:
    ```bash
    flask run
    ```
 
-6. **Acesse o projeto no navegador**:
-   - Abra o navegador e vá para: [http://127.0.0.1:5000](http://127.0.0.1:5000)
+7. **Acesse o projeto no navegador**:
+   - [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
 ---
 
-### Comandos Úteis
-
-- **Criar um usuário administrador (opcional)**:
-  Você pode criar um usuário diretamente no banco de dados para testes:
-  ```bash
-  flask shell
-  >>> from website.models import User
-  >>> from werkzeug.security import generate_password_hash
-  >>> admin = User(name="Admin", email="admin@lumina.com", password=generate_password_hash("senha123", method='sha256'))
-  >>> db.session.add(admin)
-  >>> db.session.commit()
-  >>> exit()
-  ```
-
-- **Resetar o banco de dados**:
-  Caso precise limpar e recriar o banco de dados:
-  ```bash
-  flask shell
-  >>> from website import db
-  >>> db.drop_all()
-  >>> db.create_all()
-  >>> exit()
-  ```
-
----
-
-### Estrutura do Projeto
+## 🗂️ Estrutura do Projeto
 
 ```
 Lumina/
@@ -158,11 +122,21 @@ Lumina/
 │   ├── templates/       # Templates HTML
 │   ├── __init__.py      # Inicialização do app Flask
 │   ├── models.py        # Definição das tabelas do banco de dados
-│   ├── views.py         # Rotas e lógica do backend
+│   ├── views.py         # Rotas e lógica do backend (APIs RESTful)
+│   ├── seed.py          # Script para popular o banco de dados
 ├── requirements.txt     # Dependências do projeto
 └── run.py               # Arquivo principal para rodar o app
 ```
 
 ---
 
-Agora você está pronto para executar o projeto Lumina AI! 🎉
+## 📚 Observações
+
+- O projeto segue o padrão RESTful para rotas e manipulação de dados.
+- O backend Flask serve tanto páginas HTML quanto endpoints para manipulação de dados via formulários.
+- O banco SQLite é usado por padrão para facilitar testes e desenvolvimento local.
+- Para produção, recomenda-se trocar o banco para PostgreSQL ou MySQL e configurar variáveis de ambiente adequadas.
+
+---
+
+Agora você está pronto para executar e evoluir o Lumina AI! 🚀

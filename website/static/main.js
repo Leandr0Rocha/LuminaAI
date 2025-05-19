@@ -176,3 +176,52 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const sectionIds = ['sobre', 'duvidas', 'planos', 'contato', 'area-aluno'];
+    const mainContent = document.getElementById('main-content');
+
+    function hideAllSections() {
+        if (mainContent) mainContent.style.display = 'none';
+        sectionIds.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.display = 'none';
+        });
+    }
+
+    function showSection(sectionId) {
+        hideAllSections();
+        const el = document.getElementById(sectionId);
+        if (el) el.style.display = '';
+    }
+
+    function showMainContent() {
+        if (mainContent) mainContent.style.display = '';
+        sectionIds.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.display = 'none';
+        });
+    }
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            showSection(this.dataset.section);
+        });
+    });
+
+    const logo = document.getElementById('logo-header');
+    if (logo) {
+        logo.addEventListener('click', function () {
+            showMainContent();
+        });
+    }
+
+    // Exibe a seção se houver hash na URL
+    const hash = window.location.hash.replace('#', '');
+    if (sectionIds.includes(hash)) {
+        showSection(hash);
+    } else {
+        showMainContent();
+    }
+});
