@@ -20,7 +20,7 @@ Lumina AI é uma plataforma de aprendizado que oferece cursos e soluções em in
 - **Banco de Dados**:
   - Integração com **Flask-SQLAlchemy** para persistência de dados.
   - Banco de dados **SQLite** para fácil configuração e portabilidade.
-  - Tabelas para usuários, cursos (com campos como duração, instrutor, capítulos, imagem) e associações entre eles.
+  - Tabelas para usuários, cursos (com campos como duração, instrutor, capítulos) e associações entre eles.
 
 ---
 
