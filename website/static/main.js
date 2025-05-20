@@ -104,14 +104,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const formularioCadastro = document.querySelector('.formulario-cadastro');
     if (formularioCadastro) {
-        const senhaInput = document.getElementById('senha');
-        const repetirSenhaInput = document.getElementById('repetir-senha');
-
         formularioCadastro.addEventListener('submit', (event) => {
-            if (senhaInput.value !== repetirSenhaInput.value) {
-                event.preventDefault();
-                alert('As senhas não coincidem. Por favor, verifique e tente novamente.');
-            }
+            // Remova qualquer validação JS de senha aqui!
+            // Apenas deixe o backend cuidar da validação e das mensagens flash.
         });
     }
 

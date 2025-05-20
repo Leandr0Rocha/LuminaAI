@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Anaheim:wght@400..800&family=Cagliostro&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('/static/index.css');
+@import url('/static/home.css');
+@import url('/static/cadastro.css');
 
 /* Geral */
 * {
@@ -252,7 +255,7 @@ header nav .botao:hover {
     margin: 20px;
 }
 
-.conteudo-popup p{
+.conteudo-popup p {
     margin: 20px;
     font-size: 18px;
 }
@@ -457,15 +460,477 @@ footer nav a:hover {
     background-color: hsl(0, 0%, 90%);
 }
 
+/* Login */
+.formulario-login {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.formulario-login label {
+    font-size: 16px;
+    color: hsl(0, 0%, 20%);
+    margin-bottom: 5px;
+}
+
+.formulario-login input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid hsl(0, 0%, 80%);
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.formulario-login input:focus {
+    border-color: hsl(215, 78%, 36%);
+    outline: none;
+}
+
+/* Metodologia */
+.metodologia {
+    text-align: center;
+    padding: 50px;
+    background-color: hsl(215, 78%, 41%);
+}
+
+.metodologia h2 {
+    font-family: "Cagliostro", sans-serif;
+    font-size: 36px;
+    margin-bottom: 30px;
+    color: hsl(0, 0%, 100%);
+}
+
+.linha-do-tempo {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.etapa-linha-do-tempo {
+    background: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transition: transform 0.3s ease;
+    width: auto;
+    margin: 0 auto;
+}
+
+.etapa-linha-do-tempo:hover {
+    transform: translateY(-10px);
+}
+
+.etapa-linha-do-tempo .icone img {
+    padding: 10px;
+}
+
+.etapa-linha-do-tempo h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: hsl(0, 0%, 10%);
+}
+
+.etapa-linha-do-tempo p {
+    font-size: 16px;
+    color: hsl(0, 0%, 20%);
+    line-height: 1.5;
+}
+
+/* Testemunhos */
+.depoimentos {
+    padding: 50px;
+    text-align: center;
+    background-color: hsl(206, 41%, 95%);
+}
+
+.depoimentos h2 {
+    font-family: "Cagliostro", sans-serif;
+    font-size: 36px;
+    color: hsl(0, 0%, 10%);
+    margin-bottom: 30px;
+}
+
+.grade-depoimentos {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.cartao-depoimento {
+    background-color: hsl(0, 0%, 100%, 0.8);
+    width: 40vw;
+    padding: 20px;
+    border-radius: 20px;
+    gap: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.cartao-depoimento img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 10px;
+    object-fit: cover;
+}
+
+.cartao-depoimento p {
+    font-style: italic;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: hsl(0, 0%, 20%);
+}
+
+.cartao-depoimento span {
+    font-size: 20px;
+    font-weight: bold;
+    color: hsl(215, 78%, 36%);
+}
+
+.depoimentos button {
+    background-color: hsl(0, 0%, 100%);
+    color: hsl(0, 0%, 70%);
+    border: none;
+    padding: 10px;
+    font-size: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 10px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.depoimentos button:hover {
+    background-color: hsl(0, 0%, 95%);
+}
+
+/* Seção Sobre */
+.sobre {
+    padding: 50px;
+    background-color: hsl(206, 41%, 95%);
+    text-align: center;
+}
+
+.sobre h2 {
+    font-family: "Cagliostro", sans-serif;
+    font-size: 36px;
+    color: hsl(215, 78%, 36%);
+    margin-bottom: 30px;
+}
+
+.sobre p {
+    font-size: 18px;
+    color: hsl(0, 0%, 20%);
+    line-height: 1.5;
+    max-width: 50vw;
+    margin: 0 auto 20px;
+
+}
+
+/* Estilização para Dúvidas Frequentes */
+.duvidas {
+    padding: 50px;
+    background-color: hsl(215, 78%, 36%);
+    text-align: center;
+}
+
+.duvidas h2 {
+    font-family: "Cagliostro", sans-serif;
+    font-size: 36px;
+    color: hsl(0, 0%, 100%);
+    margin-bottom: 30px;
+}
+
+.faq {
+    max-width: 50vw;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.faq details {
+    background-color: hsl(215, 78%, 46%, 0.8);
+    color: hsl(0, 0%, 100%);
+    border-radius: 8px;
+    margin: 15px;
+    padding: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.faq details:hover {
+    background-color: hsl(215, 78%, 51%, 0.8);
+    transform: scale(1.02);
+}
+
+.faq summary {
+    font-size: 20px;
+    font-weight: bold;
+    color: hsl(48, 100%, 67%);
+    margin: 10px;
+    outline: none;
+}
+
+.faq summary:hover {
+    color: hsl(48, 100%, 72%);
+}
+
+.faq details[open] summary {
+    color: hsl(48, 100%, 72%);
+}
+
+.faq details p {
+    font-size: 18px;
+    color: hsl(0, 0%, 100%);
+    margin: 10px;
+    line-height: 1.5;
+}
+
+/* Seção Planos para Empresas */
+.planos {
+    padding: 50px;
+    background-color: hsl(238, 69%, 22%);
+    color: hsl(0, 0%, 100%);
+    text-align: center;
+}
+
+.planos h2 {
+    font-family: "Cagliostro", sans-serif;
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+.planos p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    max-width: 40vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.planos ul {
+    list-style-type: square;
+    margin: 0 auto;
+    padding: 10px;
+    max-width: 40vw;
+    text-align: left;
+}
+
+.planos ul li {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: hsl(48, 100%, 67%);
+}
+
+/* Página de cadastro*/
+.cadastro {
+    padding: 40px;
+    text-align: center;
+    background-color: hsl(0, 0%, 100%);
+}
+
+.cadastro h2 {
+    font-family: "Cagliostro", sans-serif;
+    font-size: 36px;
+    color: hsl(215, 78%, 36%);
+    margin-bottom: 30px;
+}
+
+.formulario-cadastro {
+    max-width: 40vw;
+    margin: 0 auto;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.grupo-cadastro-checkbox {
+    display: flex;
+    align-content: center;
+    margin: 5px;
+    font-size: 16px;
+}
+
+.grupo-cadastro-checkbox input[type="checkbox"] {
+    border-radius: 5px;
+    width: 16px;
+    height: 16px;
+}
+
+.grupo-cadastro label {
+    font-size: 16px;
+    color: hsl(0, 0%, 10%);
+    margin: 5px;
+}
+
+.grupo-cadastro input[type="text"],
+.grupo-cadastro input[type="email"],
+.grupo-cadastro input[type="password"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid hsl(0, 0%, 80%);
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.grupo-cadastro input[type="checkbox"] {
+    margin: 10px;
+}
+
+.grupo-cadastro input:focus {
+    border-color: hsl(215, 78%, 36%);
+    outline: none;
+}
+
+.botao-cadastro {
+    background-color: hsl(48, 100%, 67%);
+    color: hsl(0, 0%, 0%);
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 50%;
+    align-self: center;
+}
+
+.botao-cadastro:hover {
+    background-color: hsl(48, 100%, 72%);
+    color: hsl(0, 0%, 10%);
+}
+
+/* Botão de excluir */
+#botao-excluir {
+    background-color: hsl(0, 70%, 40%);
+    color: hsl(0, 0%, 100%);
+    border: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#botao-excluir:hover {
+    background-color: hsl(0, 70%, 50%);
+}
+
+/* Modal de Confirmação */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-conteudo {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-conteudo p {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.botao-confirmar {
+    background-color: hsl(0, 70%, 50%);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.botao-confirmar:hover {
+    background-color: hsl(0, 70%, 60%);
+}
+
+.botao-cancelar {
+    background-color: hsl(0, 0%, 80%);
+    color: black;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.botao-cancelar:hover {
+    background-color: hsl(0, 0%, 70%);
+}
+
+/* Área do aluno */
+.area-aluno {
+    text-align: center;
+    padding: 50px;
+}
+
+.area-aluno h2 {
+    font-family: "Cagliostro", sans-serif;
+    font-size: 36px;
+    margin-bottom: 30px;
+    color: hsl(215, 78%, 36%);
+}
+
+.info-curso {
+    list-style: none;
+    margin: 10px 10px 30px;
+    gap: 15px;
+    font-weight: 700;
+    font-size: 20px;
+    color: hsl(0, 0%, 20%);
+    background-color: hsl(206, 41%, 95%);
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.capitulos {
+    list-style: decimal;
+    margin: 10px;
+    gap: 5px;
+    font-size: 18px;
+    color: hsl(0, 0%, 30%);
+    padding: 20px;
+}
+
 /* Adaptações para telas menores */
 @media (max-width: 1024px) {
-    header{
+    header {
         flex-direction: column;
         align-items: center;
         padding: 20px;
     }
-    
-    nav{
+
+    nav {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
@@ -522,8 +987,11 @@ footer nav a:hover {
     .planos ul,
     .planos p,
     .sobre p,
-    video, .modal-conteudo {
+    video,
+    .modal-conteudo {
         max-width: 70vw;
+        width: 70%;
+        margin: 30px auto;
     }
 
     .cartao-depoimento {
@@ -535,7 +1003,43 @@ footer nav a:hover {
     }
 }
 
-@media (max-width: 768px) {    
+/* Estilos para tablets menores (até 768px) */
+@media (max-width: 768px) {
+    nav {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    p,
+    li {
+        font-size: 14px;
+    }
+
+    .hero {
+        padding: 30px;
+    }
+
+    .conteudo-hero .texto-hero {
+        padding: 15px;
+        text-align: center;
+    }
+
+    .cartoes-cursos,
+    .metodologia .linha-do-tempo {
+        grid-template-columns: 1fr;
+    }
+
     .conteudo-popup,
     .formulario-contato,
     .formulario-cadastro,
@@ -543,33 +1047,70 @@ footer nav a:hover {
     .planos ul,
     .planos p,
     .sobre p,
-    video, .modal-conteudo {
-        max-width: 80vw;
+    video,
+    .modal-conteudo {
+        max-width: 90vw;
+        width: 90%;
+        margin: 20px auto;
     }
 
     .cartao-depoimento {
-        width: 80vw;
-    }
-
-    .cartoes-cursos,
-    .etapa-linha-do-tempo {
-        max-width: 80vw;
-        margin: 0 auto;
+        width: 90vw;
     }
 
     footer img {
-        width: 80vw;
+        width: 90%;
+    }
+
+    video {
+        width: 80%;
+        height: auto;
     }
 }
 
+/* Estilos para smartphones (até 480px) */
 @media (max-width: 480px) {
-    .cartoes-cursos,
-    .metodologia .linha-do-tempo {
-        grid-template-columns: repeat(1, 1fr);
+    header {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
     }
 
+    nav {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+
+    p,
+    li {
+        font-size: 14px;
+    }
+
+    .hero {
+        padding: 20px;
+    }
+
+    .conteudo-hero .texto-hero {
+        padding: 10px;
+        text-align: center;
+        /* Centraliza o texto no hero */
+    }
+
+    .cartoes-cursos,
     .metodologia .linha-do-tempo {
-        flex: 1;
+        grid-template-columns: 1fr;
+        /* Exibe os cartões/itens em uma única coluna */
     }
 
     .conteudo-popup,
@@ -579,21 +1120,23 @@ footer nav a:hover {
     .planos ul,
     .planos p,
     .sobre p,
-    video, .modal-conteudo {
-        max-width: 80vw;
+    video,
+    .modal-conteudo {
+        max-width: 95vw;
+        width: 95%;
+        margin: 15px auto;
     }
 
     .cartao-depoimento {
         width: 90vw;
     }
 
-    .cartoes-cursos,
-    .etapa-linha-do-tempo {
-        max-width: 80vw;
-        margin: 0 auto;
+    video {
+        width: 80%;
+        height: auto;
     }
 
     footer img {
-        width: 90vw;
+        width: 90%;
     }
 }
