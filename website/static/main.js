@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Botão "Voltar ao Topo"
     const botaoVoltarTopo = document.createElement('button');
-    botaoVoltarTopo.textContent = '↑';
+    botaoVoltarTopo.textContent = '⬆';
     botaoVoltarTopo.classList.add('voltar-ao-topo');
     document.body.appendChild(botaoVoltarTopo);
 
