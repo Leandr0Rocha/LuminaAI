@@ -12,7 +12,7 @@
 <body>
     <header class="cabecalho">
         <div class="logo">
-            <img src="\static\images\Lumina AI.png" alt="Logo da marca" />
+            <a href="/"><img src="\static\images\Lumina AI.png" alt="Logo da marca" /></a>
         </div>
         <nav>
             <a href="/#contato">Contato</a>
@@ -20,13 +20,13 @@
         </nav>
     </header>
 
-        {% with messages = get_flashed_messages(with_categories=true) %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
-        <div class="flash-messages">
+    <div class="flash-messages">
         {% for category, message in messages %}
-            <div class="flash-message {{ category }}">{{ message }}</div>
+        <div class="flash-message {{ category }}">{{ message }}</div>
         {% endfor %}
-        </div>
+    </div>
     {% endif %}
     {% endwith %}
 
@@ -35,25 +35,28 @@
         <form action="/cadastro" method="post" class="formulario-cadastro">
             <div class="grupo-cadastro">
                 <label for="nome-completo">Nome*</label>
-                <input type="text" id="nome-completo" name="nome-completo" placeholder="Digite seu nome completo" required minlength="2">
+                <input type="text" id="nome-completo" name="nome_completo" placeholder="Digite seu nome completo"
+                    required minlength="2">
             </div>
             <div class="grupo-cadastro">
                 <label for="nome-usuario">Nome de Usuário*</label>
-                <input type="text" id="nome-usuario" name="nome-usuario" placeholder="Escolha um nome de usuário" required minlength="3">
+                <input type="text" id="nome-usuario" name="nome_usuario" placeholder="Escolha um nome de usuário"
+                    required minlength="3">
             </div>
             <div class="grupo-cadastro">
                 <label for="email">E-mail*</label>
-                <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$">
+                <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required
+                    pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$">
             </div>
             <div class="grupo-cadastro">
                 <label for="senha">Senha*</label>
-                <input type="password" id="senha" name="senha" placeholder="Sua senha" required minlength="8" 
-                    pattern="(?=.*[0-9])(?=.*[A-Z]).{8,}" 
+                <input type="password" id="senha" name="senha" placeholder="Sua senha" required minlength="8"
+                    pattern="(?=.*[0-9])(?=.*[A-Z]).{8,}"
                     title="A senha deve ter pelo menos 8 caracteres, incluindo um número e uma letra maiúscula.">
             </div>
             <div class="grupo-cadastro">
                 <label for="repetir-senha">Repetir Senha*</label>
-                <input type="password" id="repetir-senha" name="repetir-senha" placeholder="Repita sua senha" required>
+                <input type="password" id="repetir-senha" name="repetir_senha" placeholder="Repita sua senha" required>
             </div>
             <div class="grupo-cadastro-checkbox">
                 <label for="termos">
@@ -64,7 +67,7 @@
             <button type="submit" class="botao-cadastro">Registrar</button>
         </form>
     </section>
-    
+
     <!-- Popup cadastro -->
     <div id="popup-cadastro" class="popup" style="display: {{ 'flex' if cadastro_sucesso else 'none' }};">
         <div class="conteudo-popup">
@@ -76,16 +79,16 @@
 
     <footer>
         <div class="conteudo-rodape">
-          <img src="/static/images/Iluminando o caminho para um futuro com IA.png" alt="" />
+            <img src="/static/images/Iluminando o caminho para um futuro com IA.png" alt="" />
         </div>
         <div class="conteudo-rodape">
-          <p>&copy; 2025 Lumina AI. Todos os direitos reservados.</p>
-          <nav>
-            <a href="#">Política de Privacidade</a>
-            <a href="#">Termos de Uso</a>
-          </nav>
+            <p>&copy; 2025 Lumina AI. Todos os direitos reservados.</p>
+            <nav>
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Termos de Uso</a>
+            </nav>
         </div>
-      </footer>
+    </footer>
     <script src="\static\main.js"></script>
 
 </body>

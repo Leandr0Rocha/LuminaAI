@@ -1,44 +1,93 @@
-document.addEventListener("DOMContentLoaded", () => {
-    // Popup de Login
-    const botaoLogin = document.querySelector('.botao[href="#"]');
-    const popupLogin = document.getElementById('popup-login');
-    const botaoFecharLogin = document.querySelector('.botao-fechar');
+/**
+ * Lumina AI - JavaScript Principal
+ * Gerencia interações da interface, modais, animações e navegação
+ */
 
-    if (botaoLogin && popupLogin && botaoFecharLogin) {
-        botaoLogin.addEventListener('click', (event) => {
-            event.preventDefault();
-            popupLogin.style.display = 'flex';
+// Configurações globais
+const CONFIG = {
+    ANIMATION_DELAY: 5000,
+    SCROLL_THRESHOLD: 300,
+    MESSAGE_TIMEOUT: 3000
+};
+
+// Classe para gerenciar o modal de login
+class LoginModal {
+    constructor() {
+        this.modal = document.getElementById('popup-login');
+        this.trigger = document.querySelector('.botao[href="#"]');
+        this.closeBtn = document.querySelector('.botao-fechar');
+        this.init();
+    }
+
+    init() {
+        if (!this.modal || !this.trigger || !this.closeBtn) return;
+
+        this.trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.show();
         });
 
-        botaoFecharLogin.addEventListener('click', () => {
-            popupLogin.style.display = 'none';
-        });
-
-        window.addEventListener('click', (event) => {
-            if (event.target === popupLogin) {
-                popupLogin.style.display = 'none';
-            }
+        this.closeBtn.addEventListener('click', () => this.hide());
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === this.modal) this.hide();
         });
     }
 
-    // Remove o aviso de login
-    const flashMessages = document.querySelectorAll('.flash-message');
-    flashMessages.forEach((message) => {
-        setTimeout(() => {
-            message.style.opacity = '0';
-            setTimeout(() => message.remove(), 500);
-        }, 5000);
+    show() {
+        this.modal.style.display = 'flex';
+        this.modal.setAttribute('aria-hidden', 'false');
+    }
 
-        message.addEventListener('click', () => {
-            message.style.opacity = '0';
-            setTimeout(() => message.remove(), 500);
+    hide() {
+        this.modal.style.display = 'none';
+        this.modal.setAttribute('aria-hidden', 'true');
+    }
+}
+
+// Classe para gerenciar mensagens flash
+class FlashMessages {
+    constructor() {
+        this.messages = document.querySelectorAll('.flash-message');
+        this.init();
+    }
+
+    init() {
+        this.messages.forEach(message => {
+            this.setupAutoHide(message);
+            this.setupClickToHide(message);
         });
-    });
+    }
 
-    // Animações ao Rolar
-    const elementosAnimados = document.querySelectorAll('.animar-ao-rolar');
-    if (elementosAnimados.length > 0) {
-        const observador = new IntersectionObserver(entries => {
+    setupAutoHide(message) {
+        setTimeout(() => {
+            this.hideMessage(message);
+        }, CONFIG.ANIMATION_DELAY);
+    }
+
+    setupClickToHide(message) {
+        message.addEventListener('click', () => {
+            this.hideMessage(message);
+        });
+    }
+
+    hideMessage(message) {
+        message.style.opacity = '0';
+        setTimeout(() => message.remove(), 500);
+    }
+}
+
+// Classe para animações de scroll
+class ScrollAnimations {
+    constructor() {
+        this.elements = document.querySelectorAll('.animar-ao-rolar');
+        this.init();
+    }
+
+    init() {
+        if (this.elements.length === 0) return;
+
+        const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visivel');
@@ -46,52 +95,223 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        elementosAnimados.forEach(elemento => observador.observe(elemento));
+        this.elements.forEach(element => observer.observe(element));
+    }
+}
+
+// Classe para o carrossel de depoimentos
+class DepoimentosCarousel {
+    constructor() {
+        this.depoimentos = document.querySelectorAll('.cartao-depoimento');
+        this.total = this.depoimentos.length;
+        this.current = 0;
+        this.nextBtn = document.querySelector('.proximo-depoimento');
+        this.prevBtn = document.querySelector('.depoimento-anterior');
+        this.init();
     }
 
-    // Carrossel de Depoimentos
-    const depoimentos = document.querySelectorAll('.cartao-depoimento');
-    const totalDepoimentos = depoimentos.length;
-    let depoimentoAtual = 0;
+    init() {
+        if (this.total === 0 || !this.nextBtn || !this.prevBtn) return;
 
-    function mostrarDepoimento(indice) {
-        depoimentos.forEach((depoimento, i) => {
-            depoimento.style.display = i === indice ? 'block' : 'none';
+        this.nextBtn.addEventListener('click', () => this.next());
+        this.prevBtn.addEventListener('click', () => this.prev());
+        this.showCurrent();
+    }
+
+    showCurrent() {
+        this.depoimentos.forEach((depoimento, i) => {
+            depoimento.style.display = i === this.current ? 'block' : 'none';
         });
     }
 
-    const botaoProximo = document.querySelector('.proximo-depoimento');
-    const botaoAnterior = document.querySelector('.depoimento-anterior');
-
-    if (botaoProximo && botaoAnterior && depoimentos.length > 0) {
-        botaoProximo.addEventListener('click', () => {
-            depoimentoAtual = (depoimentoAtual + 1) % totalDepoimentos;
-            mostrarDepoimento(depoimentoAtual);
-        });
-
-        botaoAnterior.addEventListener('click', () => {
-            depoimentoAtual = (depoimentoAtual - 1 + totalDepoimentos) % totalDepoimentos;
-            mostrarDepoimento(depoimentoAtual);
-        });
-
-        mostrarDepoimento(depoimentoAtual);
+    next() {
+        this.current = (this.current + 1) % this.total;
+        this.showCurrent();
     }
 
-    // Botão "Voltar ao Topo"
-    const botaoVoltarTopo = document.createElement('button');
-    botaoVoltarTopo.textContent = '⬆';
-    botaoVoltarTopo.classList.add('voltar-ao-topo');
-    document.body.appendChild(botaoVoltarTopo);
+    prev() {
+        this.current = (this.current - 1 + this.total) % this.total;
+        this.showCurrent();
+    }
+}
 
-    window.addEventListener('scroll', () => {
-        botaoVoltarTopo.style.display = window.scrollY > 300 ? 'block' : 'none';
-    });
+// Classe para o botão "Voltar ao Topo"
+class BackToTop {
+    constructor() {
+        this.button = this.createButton();
+        this.init();
+    }
 
-    botaoVoltarTopo.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    createButton() {
+        const button = document.createElement('button');
+        button.textContent = '⬆';
+        button.classList.add('voltar-ao-topo');
+        button.setAttribute('aria-label', 'Voltar ao topo da página');
+        document.body.appendChild(button);
+        return button;
+    }
 
-    // Formulário de Cadastro e Popup de Cadastro
+    init() {
+        window.addEventListener('scroll', () => {
+            this.button.style.display = window.scrollY > CONFIG.SCROLL_THRESHOLD ? 'block' : 'none';
+        });
+
+        this.button.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+}
+
+// Classe para gerenciar inscrições em cursos
+class CourseEnrollment {
+    constructor() {
+        this.isAuthenticated = document.body.getAttribute('data-authenticated') === 'true';
+        this.warningMessage = document.getElementById('mensagem-aviso');
+        this.enrollButtons = document.querySelectorAll('.botao-inscrever');
+        this.init();
+    }
+
+    init() {
+        this.enrollButtons.forEach(button => {
+            button.addEventListener('click', () => this.handleEnrollment(button));
+        });
+    }
+
+    handleEnrollment(button) {
+        if (!this.isAuthenticated) {
+            this.showWarning();
+        } else {
+            button.closest('form').submit();
+        }
+    }
+
+    showWarning() {
+        if (this.warningMessage) {
+            this.warningMessage.style.display = 'block';
+                    setTimeout(() => {
+                this.warningMessage.style.display = 'none';
+            }, CONFIG.MESSAGE_TIMEOUT);
+        }
+    }
+}
+
+// Classe para gerenciar navegação entre seções
+class SectionNavigation {
+    constructor() {
+        this.sectionIds = ['sobre', 'duvidas', 'planos', 'contato', 'area-aluno'];
+        this.mainContent = document.getElementById('main-content');
+        this.logo = document.getElementById('logo-header');
+        this.init();
+    }
+
+    init() {
+        this.setupNavLinks();
+        this.setupLogoClick();
+        this.handleInitialSection();
+    }
+
+    setupNavLinks() {
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.showSection(link.dataset.section);
+            });
+        });
+    }
+
+    setupLogoClick() {
+        if (this.logo) {
+            this.logo.addEventListener('click', () => this.showMainContent());
+        }
+    }
+
+    handleInitialSection() {
+        const hash = window.location.hash.replace('#', '');
+        if (this.sectionIds.includes(hash)) {
+            this.showSection(hash);
+        } else {
+            this.showMainContent();
+        }
+    }
+
+    hideAllSections() {
+        if (this.mainContent) this.mainContent.style.display = 'none';
+        this.sectionIds.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.display = 'none';
+        });
+    }
+
+    showSection(sectionId) {
+        this.hideAllSections();
+        const el = document.getElementById(sectionId);
+        if (el) el.style.display = '';
+    }
+
+    showMainContent() {
+        if (this.mainContent) this.mainContent.style.display = '';
+        this.sectionIds.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.display = 'none';
+        });
+    }
+}
+
+// Classe para gerenciar modal de confirmação de exclusão
+class DeleteConfirmationModal {
+    constructor() {
+        this.deleteBtn = document.getElementById("botao-excluir");
+        this.modal = document.getElementById("modal-confirmacao");
+        this.confirmBtn = document.getElementById("confirmar-exclusao");
+        this.cancelBtn = document.getElementById("cancelar-exclusao");
+        this.form = document.getElementById("form-excluir-conta");
+        this.init();
+    }
+
+    init() {
+        if (!this.deleteBtn || !this.modal || !this.confirmBtn || !this.cancelBtn) return;
+
+        this.deleteBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            this.show();
+        });
+
+        this.confirmBtn.addEventListener("click", () => this.confirm());
+        this.cancelBtn.addEventListener("click", () => this.hide());
+
+        window.addEventListener("click", (e) => {
+            if (e.target === this.modal) this.hide();
+        });
+    }
+
+    show() {
+        this.modal.style.display = "flex";
+    }
+
+    hide() {
+        this.modal.style.display = "none";
+    }
+
+    confirm() {
+        if (this.form) {
+            this.form.submit();
+        }
+    }
+}
+
+// Inicialização da aplicação
+document.addEventListener("DOMContentLoaded", () => {
+    // Inicializar todos os componentes
+    new LoginModal();
+    new FlashMessages();
+    new ScrollAnimations();
+    new DepoimentosCarousel();
+    new BackToTop();
+    new CourseEnrollment();
+    new SectionNavigation();
+    new DeleteConfirmationModal();
+
+    // Verificar se há popup de cadastro para exibir
     const body = document.querySelector('body');
     const cadastroSucesso = body.getAttribute('data-cadastro-sucesso') === 'true';
 
@@ -100,123 +320,5 @@ document.addEventListener("DOMContentLoaded", () => {
         if (popupCadastro) {
             popupCadastro.style.display = 'flex';
         }
-    }
-
-    const formularioCadastro = document.querySelector('.formulario-cadastro');
-    if (formularioCadastro) {
-        formularioCadastro.addEventListener('submit', (event) => {
-            // Remova qualquer validação JS de senha aqui!
-            // Apenas deixe o backend cuidar da validação e das mensagens flash.
-        });
-    }
-
-    // Aviso de autenticação para inscrição
-    const isAuthenticated = body.getAttribute('data-authenticated') === 'true';
-    const mensagemAviso = document.getElementById('mensagem-aviso');
-    const botoesInscrever = document.querySelectorAll('.botao-inscrever');
-
-    botoesInscrever.forEach(botao => {
-        botao.addEventListener('click', () => {
-            if (!isAuthenticated) {
-                if (mensagemAviso) {
-                    mensagemAviso.style.display = 'block';
-                    setTimeout(() => {
-                        mensagemAviso.style.display = 'none';
-                    }, 3000);
-                }
-            } else {
-                botao.closest('form').submit();
-            }
-        });
-    });
-
-    // Formulário de Contato - Validação e Popup de Confirmação
-    const formularioContato = document.querySelector('.formulario-contato');
-    if (formularioContato) {
-        formularioContato.addEventListener('submit', (event) => {
-            // Deixe o backend lidar com a validação e flash messages
-        });
-    }
-
-    const botaoExcluir = document.getElementById("botao-excluir");
-    const modalConfirmacao = document.getElementById("modal-confirmacao");
-    const botaoConfirmar = document.getElementById("confirmar-exclusao");
-    const botaoCancelar = document.getElementById("cancelar-exclusao");
-    const formExcluirConta = document.getElementById("form-excluir-conta");
-
-    if (botaoExcluir && modalConfirmacao && botaoConfirmar && botaoCancelar) {
-        // Exibe o modal ao clicar no botão "Excluir Conta"
-        botaoExcluir.addEventListener("click", (event) => {
-            event.preventDefault();
-            modalConfirmacao.style.display = "flex";
-        });
-
-        // Confirma a exclusão e envia o formulário
-        botaoConfirmar.addEventListener("click", () => {
-            if (formExcluirConta) {
-                formExcluirConta.submit();
-            }
-        });
-
-        // Cancela a exclusão e fecha o modal
-        botaoCancelar.addEventListener("click", () => {
-            modalConfirmacao.style.display = "none";
-        });
-
-        // Fecha o modal ao clicar fora do conteúdo
-        window.addEventListener("click", (event) => {
-            if (event.target === modalConfirmacao) {
-                modalConfirmacao.style.display = "none";
-            }
-        });
-    }
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-    const sectionIds = ['sobre', 'duvidas', 'planos', 'contato', 'area-aluno'];
-    const mainContent = document.getElementById('main-content');
-
-    function hideAllSections() {
-        if (mainContent) mainContent.style.display = 'none';
-        sectionIds.forEach(id => {
-            const el = document.getElementById(id);
-            if (el) el.style.display = 'none';
-        });
-    }
-
-    function showSection(sectionId) {
-        hideAllSections();
-        const el = document.getElementById(sectionId);
-        if (el) el.style.display = '';
-    }
-
-    function showMainContent() {
-        if (mainContent) mainContent.style.display = '';
-        sectionIds.forEach(id => {
-            const el = document.getElementById(id);
-            if (el) el.style.display = 'none';
-        });
-    }
-
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', function (e) {
-            e.preventDefault();
-            showSection(this.dataset.section);
-        });
-    });
-
-    const logo = document.getElementById('logo-header');
-    if (logo) {
-        logo.addEventListener('click', function () {
-            showMainContent();
-        });
-    }
-
-    // Exibe a seção se houver hash na URL
-    const hash = window.location.hash.replace('#', '');
-    if (sectionIds.includes(hash)) {
-        showSection(hash);
-    } else {
-        showMainContent();
     }
 });

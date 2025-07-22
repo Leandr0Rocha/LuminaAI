@@ -1,3 +1,5 @@
+"""Script para popular o banco de dados com cursos iniciais."""
+
 import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -5,6 +7,7 @@ from website import create_app, db
 from website.models import Curso
 
 def seed_data():
+    """Popula o banco de dados com cursos de exemplo."""
     cursos = [
         Curso(
             titulo="Introdução à IA generativa",

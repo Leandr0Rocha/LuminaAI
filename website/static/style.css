@@ -287,6 +287,8 @@ header nav .botao:hover {
     font-weight: bold;
     color: hsl(0, 0%, 100%);
     cursor: pointer;
+    background-color: transparent;
+    border: none;
 }
 
 .botao-fechar:hover {
@@ -604,6 +606,7 @@ footer nav a:hover {
     border: none;
     padding: 10px;
     font-size: 24px;
+    font-weight: 600;
     border-radius: 50%;
     cursor: pointer;
     margin: 10px;
@@ -892,6 +895,7 @@ footer nav a:hover {
 .area-aluno {
     text-align: center;
     padding: 50px;
+    min-height: 1vh;
 }
 
 .area-aluno h2 {

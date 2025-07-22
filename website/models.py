@@ -12,7 +12,13 @@ class User(db.Model, UserMixin):
     date_created = db.Column(db.DateTime(timezone=True), default=func.now())
     cursos = db.relationship('Curso', secondary='user_curso', backref='alunos')
 
+    def check_password(self, password):
+        """Verifica se a senha fornecida corresponde ao hash armazenado."""
+        from werkzeug.security import check_password_hash
+        return check_password_hash(self.password, password)
+
 class Curso(db.Model):
+    """Modelo para armazenar informações dos cursos."""
     id = db.Column(db.Integer, primary_key=True)
     titulo = db.Column(db.String(100), nullable=False)
     descricao = db.Column(db.Text, nullable=False)
@@ -22,6 +28,7 @@ class Curso(db.Model):
     imagem = db.Column(db.String(200), nullable=True)
 
     def __repr__(self):
+        """Retorna uma representação legível do curso."""
         return f'<Curso {self.titulo}>'
 
 # Tabela de associação para o relacionamento muitos-para-muitos

@@ -1,11 +1,16 @@
+"""Módulo de inicialização da aplicação Flask."""
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
 # Inicializa o banco de dados
+
+
 db = SQLAlchemy()
 
 def create_app():
+    """Cria e configura a aplicação Flask, registrando blueprints e inicializando extensões."""
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'sua_chave_secreta'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
