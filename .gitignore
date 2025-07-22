@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.env
+.env
+*.venv
+venv/
+ENV/
+env/
+*.egg-info/
+dist/
+build/
+*.log
+
+# VS Code
+.vscode/
+
+# Flask/Migrations
+instance/
+.migrations/
+*.db
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Static/Uploads
+website/static/uploads/
+website/static/*.tmp
+
+# Test
