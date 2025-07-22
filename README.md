@@ -4,7 +4,7 @@
 ![image](https://github.com/user-attachments/assets/13b31302-f0b7-4fe0-879d-9c9c3c32830c)
 
 
-Lumina AI é uma plataforma de aprendizado que oferece cursos e soluções em inteligência artificial para estudantes, profissionais e empresas. O projeto utiliza **Flask** como backend, **SQLite** como banco de dados e segue o padrão de APIs RESTful para comunicação e manipulação de dados.
+Lumina AI é uma plataforma de aprendizado que oferece cursos e soluções em inteligência artificial para estudantes, profissionais e empresas. O projeto utiliza **Flask** como framework web, **SQLite** como banco de dados e segue o padrão de APIs RESTful para comunicação e manipulação de dados.
 
 ---
 
